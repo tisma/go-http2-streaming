@@ -15,7 +15,13 @@ func main() {
 		log.Println(err)
 		return
 	}
-	log.Println(string(data))
+	// log.Println(string(data))
+
+	go func() {
+		client := new(http2.Client)
+		client.Dial()
+		client.Post(data)
+	}()
 
 	server := new(http2.Server)
 	err = server.Initialize()
